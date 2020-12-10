@@ -8,27 +8,26 @@ def read_input():
 
 # Given a buffer size of 25, determine whether the buffer contains two numbers whose sum is the next element to be added.
 # If not, add the new element to the buffer and remove the oldest one.
-# Note: unoptimized solution, needs reworking
 def day09(input: list):
 	max_buffer = 25
-	buffer = []
 
-	for i, x in enumerate(input):
-		if len(buffer) == max_buffer:
-			x_found = False
-			for j in range(0, len(buffer) - 1):
-				for k in range(j + 1, len(buffer)):
-					if buffer[j] + buffer[k] == x:
-						x_found = True
-						break
-			if not x_found:
-				print(x)
-				return x
+	for i in range(25, len(input)):
+		x = input[i]
+		if not check_sum(x, input[i-max_buffer:i]):
+			print(x)
+			return x
+	print(i)
 
-		if len(buffer) < max_buffer:
-			buffer.append(x)
+def check_sum(target: int, buffer: list):
+	complements = {}
+
+	for x in buffer:
+		if x in complements:
+			return True
 		else:
-			buffer = buffer[1:25] + [x]
+			complements[target-x] = 1
+
+	return False
 
 # Find a subarray in the sequence whose sum equals the result from part one. Return the sum of the maximum
 # and minimum element of this sequence.
