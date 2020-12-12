@@ -144,5 +144,5 @@ def check_line_of_sight(input: list, range_x: list, range_y: list):
 
 if __name__ == '__main__':
 	input_list = read_input()
-	#day11(input_list)
+	day11(input_list)
 	day11_2(input_list)
