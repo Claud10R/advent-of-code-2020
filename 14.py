@@ -19,6 +19,9 @@ def parse_input(input: list):
 			list.append([int(parsed[0][4:-1]), int(parsed[1])])
 	return list
 
+# Given some bitmasks, and pairs address-value, apply the newest bitmask to the value.
+# The non-X bits in the bitmasks need to replace the corresponding bits in the value.
+# Return the sum of the values stored in memory.
 def day14(input: list):
 	memory = {}
 	curr_mask = ""
@@ -34,6 +37,16 @@ def day14(input: list):
 
 	print(sum(memory.values()))
 
+# Apply the bitmasks to the addresses now. Bits set to 0 cause no changes to the address,
+# bits set to 1 replace the corresponding bit in the address, bits set to X replace the
+# corresponding bits in the address creating "floating" addresses. All the possible combinations
+# of [0,1] instead of Xs are then considered as real addresses.
+# Example: 
+# 10X010X Bitmask
+# 0011000 Address
+# 10X110X Floating Address
+# 1001100, 1001101, 1011100, 1011101 Real addresses
+# Return the sum of the values stored in memory.
 def day14_2(input: list):
 	memory = {}
 	curr_mask = ""
